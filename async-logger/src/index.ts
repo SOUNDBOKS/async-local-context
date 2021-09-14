@@ -15,9 +15,7 @@ const transform = (stream: Writable, transformer: AugmentFn): Writable => {
     return transformStream
 }
 
-const stdout = transform(process.stdout, m => m + "\n")
-const logger = create<Writable>(() => stdout)
-
+const logger = create<Writable>(() => process.stdout)
 
 type AugmentFn = (a: string) => string
 
