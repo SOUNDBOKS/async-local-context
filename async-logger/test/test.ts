@@ -1,4 +1,4 @@
-import Logger from "./logger"
+import Logger from "../src"
 
 Logger.log("Start");
 

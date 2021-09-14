@@ -1,8 +1,7 @@
-// example usage of an async context as a context-aware-logger
 
 import { PassThrough, Transform, Writable } from "stream"
 import { pipeline } from "stream/promises"
-import { create } from "../src"
+import { create } from "@soundboks/async-local-context"
 
 
 const transform = (stream: Writable, transformer: AugmentFn): Writable => {
@@ -33,5 +32,12 @@ export default new (class {
 
     public collect<T>(stream: Writable, inner: () => Promise<T>): Promise<T> {
         return logger.run(stream, inner)
+    }
+
+    public tap<T>(stream: Writable, inner: () => Promise<T>): Promise<T> {
+        const splitStream = new PassThrough()
+        splitStream.pipe(stream)
+        splitStream.pipe(logger.use())
+        return logger.run(splitStream, inner)
     }
 })()

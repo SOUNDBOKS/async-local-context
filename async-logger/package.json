@@ -1,0 +1,19 @@
+{
+  "name": "@soundboks/async-logger",
+  "version": "0.1.2",
+  "main": "build/tsc/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@soundboks/async-local-context": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.8",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  },
+  "repository": "https://github.com/SOUNDBOKS/async-local-context",
+  "scripts": {
+    "release:github": "yarn publish --registry=https://npm.pkg.github.com --no-git-tag-version",
+    "release:npm": "yarn publish --no-git-tag-version --access public"
+  }
+}
