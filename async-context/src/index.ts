@@ -10,10 +10,12 @@ export class AsyncContextProvider<T> {
         this.asyncStorage = new AsyncLocalStorage()
     }
 
-    public async run<U>(value: T, cb: () => Promise<U>): Promise<U> {
-        return this.asyncStorage.run(value, cb)
+    // Runs inner in context of 'value'
+    public async run<U>(value: T, inner: () => Promise<U>): Promise<U> {
+        return this.asyncStorage.run(value, inner)
     }
 
+    // Retrieve the current context
     public use(): T {
         let val = this.asyncStorage.getStore()
         if (!val && !this.defaultProvider) throw new Error("[AsyncContextProvider::use] Store not found in context and no defaultProvider was given")
