@@ -20,12 +20,27 @@ const transform = (stream: Writable, transformer: AugmentFn): Writable => {
 
 // AsyncContext for containing the logging context
 const logger = create<Writable>(() => process.stdout)
-
+const throwIfSome = err => {
+    if (err) throw err
+}
 
 export default new (class {
     // Pipe a string into the containing logging context
-    public log (message: string) { 
-        logger.use().write(message)
+    // Appends a newline
+    public log(message: string) { 
+        logger.use().write(message + "\n", throwIfSome)
+    }
+
+    // Pipe a string into the containing logging context
+    // Does not append a newline
+    public write(chunk: string) {
+        logger.use().write(chunk, throwIfSome)
+    }
+
+    
+    // Retrieve the underlying write stream
+    public use (): Writable {
+        return logger.use()
     }
 
 
