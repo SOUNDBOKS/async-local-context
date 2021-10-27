@@ -20,7 +20,7 @@ const transform = (stream: Writable, transformer: AugmentFn): Writable => {
 
 // AsyncContext for containing the logging context
 const logger = create<Writable>(() => process.stdout)
-const throwIfSome = err => {
+const throwIfSome = (err: Error | null | undefined) => {
     if (err) throw err
 }
 

@@ -9,7 +9,7 @@ Logger.augment(m => "[Global] " + m, async () => {
         await Logger.augment(m => `[${n}]: ${m}`, async () => {
             await new Promise(resolve => setTimeout(resolve, Math.random() * 100))
             Logger.log("Bruh " + n)
-            Logger.log("???")
+            Logger.write("???\n")
         })
     }))
 }).then(() => {

@@ -19,7 +19,7 @@ export class AsyncContextProvider<T> {
     public use(): T {
         let val = this.asyncStorage.getStore()
         if (!val && !this.defaultProvider) throw new Error("[AsyncContextProvider::use] Store not found in context and no defaultProvider was given")
-        return val || this.defaultProvider()
+        return val || this.defaultProvider!()
     }
 }
 
