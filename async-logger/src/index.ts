@@ -4,6 +4,7 @@ import { AsyncContextProvider, create } from "@soundboks/async-local-context"
 
 export type LogHandler<LogT> = (_: LogT) => void
 export type AugmentFn<T> = (a: T) => T
+
 export class AsyncLogger<LogT> {
     private logProvider: AsyncContextProvider<LogHandler<LogT>>
 
